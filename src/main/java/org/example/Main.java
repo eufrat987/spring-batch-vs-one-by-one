@@ -6,6 +6,8 @@ import org.example.testscenario.update.BatchUpdateTimeMeasure;
 import org.example.testscenario.update.OneByOneUpdateTimeMeasure;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.util.StopWatch;
 
 @SpringBootApplication
 public class Main {
@@ -19,18 +21,16 @@ public class Main {
 
         var personDao = context.getBean(JdbcPersonDao.class);
 
-        var somePerson = personDao.getPerson(1234);
-        assert somePerson.getFirstName().equals("John 1234") : "Should be created and set.";
+        assert personDao.getPerson(1234).getFirstName().equals("John 1234") : "Should be created and set.";
 
-//        {
-//            System.out.println("Test Bath");
-//            var batch = context.getBean(BatchUpdateTimeMeasure.class);
-//            batch.setNewFirstName("Batch");
-//            batch.test();
-//        }
+        {
+            System.out.println("Test Bath");
+            var batch = context.getBean(BatchUpdateTimeMeasure.class);
+            batch.setNewFirstName("Batch");
+            batch.test();
+        }
 //
-//        somePerson = personDao.getPerson(1234);
-//        assert somePerson.getFirstName().equals("Batch") : "Should be updated.";
+//        assert personDao.getPerson(1234).getFirstName().equals("Batch") : "Should be updated.";
 
         {
             System.out.println("Test One by One");
@@ -39,9 +39,15 @@ public class Main {
             oneByOne.test();
         }
 
-        somePerson = personDao.getPerson(1234);
-        assert somePerson.getFirstName().equals("One") : "Should be updated.";
+        assert personDao.getPerson(1234).getFirstName().equals("One") : "Should be updated.";
 
+        System.out.println(context.getBean(StopWatch.class).prettyPrint());
         SpringApplication.exit(context);
     }
+
+    @Bean
+    public StopWatch stopWatch() {
+        return new StopWatch();
+    }
+
 }
