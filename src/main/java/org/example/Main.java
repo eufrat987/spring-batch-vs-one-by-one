@@ -29,8 +29,8 @@ public class Main {
             batch.setNewFirstName("Batch");
             batch.test();
         }
-//
-//        assert personDao.getPerson(1234).getFirstName().equals("Batch") : "Should be updated.";
+
+        assert personDao.getPerson(1234).getFirstName().equals("Batch") : "Should be updated.";
 
         {
             System.out.println("Test One by One");

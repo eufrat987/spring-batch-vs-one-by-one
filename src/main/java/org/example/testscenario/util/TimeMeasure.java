@@ -3,8 +3,6 @@ package org.example.testscenario.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StopWatch;
 
-import java.util.concurrent.TimeUnit;
-
 public abstract class TimeMeasure {
 
     @Autowired
@@ -20,7 +18,6 @@ public abstract class TimeMeasure {
         stopWatch.start(measureName);
         execute();
         stopWatch.stop();
-
     }
 
     protected abstract void execute();
