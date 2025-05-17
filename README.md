@@ -32,4 +32,7 @@ Batch update is at least 2 times faster.
 
 # Why?
 
-...
+Batch Processing allows you to group related SQL statements into a batch and submit them with one call to the database.
+When you send several SQL statements to the database at once, you reduce the amount of communication overhead, thereby improving performance.
+Source: https://www.tutorialspoint.com/jdbc/jdbc-batch-processing.htm
+
